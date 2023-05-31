@@ -101,7 +101,6 @@ const authReducer = (state = initialState, action) => {
                 error: null
             };
         case LOGIN_FAILURE:
-            window.alert("Invalid username or password");
             return {
                 isAuthenticated: false,
                 error: action.payload

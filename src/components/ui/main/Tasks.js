@@ -81,7 +81,7 @@ function Tasks() {
 
     useEffect(() => {
         dispatch(fetchTasks({ page: page + 1, sort_field: sortField, sort_direction: sortDirection }));
-    }, [dispatch, page, rowsPerPage, sortField, sortDirection,editedTask]);
+    }, [dispatch, page, rowsPerPage, sortField, sortDirection]);
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);

@@ -33,18 +33,20 @@ export const updateTask = (params) => (dispatch) => {
     dispatch({ type: UPDATE_TASK_REQUEST });
     return updateTaskApi(params)
         .then((data) => dispatch({ type: UPDATE_TASK_SUCCESS, payload: data }))
-        .catch((error) => dispatch({ type: UPDATE_TASK_FAILURE, payload: error }));
+        .catch((error) => {
+            dispatch(dispatch({ type: LOGIN_FAILURE, payload: "Необходима авторизация" }))
+            return dispatch({ type: UPDATE_TASK_FAILURE, payload: error })
+        });
 };
 
 export const login = (username, password) => (dispatch) => {
     dispatch({ type: LOGIN_REQUEST });
     return loginAPI(username, password).then((response) => {
-        console.log(response)
             Utils.toLS("toDoAppToken", response.temp_token);
             return dispatch({ type: LOGIN_SUCCESS });
         })
         .catch((error) => {
-            return dispatch({ type: LOGIN_FAILURE, payload: "Invalid username or password" });
+            return dispatch({ type: LOGIN_FAILURE, payload: "Неверные имя или пароль" });
         });
 };
 

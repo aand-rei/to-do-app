@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from '@mui/styles';
 import {
@@ -9,7 +9,7 @@ import {
     DialogContent,
     DialogActions
 } from '@mui/material';
-import { login, logout } from '../../../redux/actions';
+import {login, logout} from '../../../redux/actions';
 
 const useStyles = makeStyles({
     header: {
@@ -27,6 +27,13 @@ function Header() {
     const [openLogin, setOpenLogin] = React.useState(false);
     const [userName, setUserName] = React.useState('');
     const [userPass, setUserPass] = React.useState('');
+
+    useEffect(() => {
+        if(authError){
+            setOpenLogin(true);
+            window.alert(authError);
+        }
+    }, [authError]);
 
     const handleLoginWin = () => {
         setOpenLogin((e) => !e);
